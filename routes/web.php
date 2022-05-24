@@ -13,9 +13,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+App::setLocale('nl');
+
+Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::post('/', [App\Http\Controllers\HomeController::class, 'join']);
 
 Route::get('/dashboard', function () {
     return view('dashboard');

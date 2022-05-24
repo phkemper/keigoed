@@ -1,3 +1,61 @@
-@import 'tailwindcss/base';
-@import 'tailwindcss/components';
-@import 'tailwindcss/utilities';
+/* VARIABLES */
+:root {
+ /* Main colors */
+	--aubergine:#3C0038;
+	--red:#FF3333;
+	--green:#33FF33;
+	--blue:#3333FF;
+	--yellow:#EEDD33;
+	--grey:#B2B2B2;
+	
+	/* Font sizes */
+	--small:10px;
+	--medium:16px;
+	--large:24px;
+}
+
+/* GENERAL ELEMENTS */
+nav {
+	position:absolute;
+	bottom:0;
+	text-align:center;
+	width:100%;
+}
+/* PLAYER ELEMENTS */
+body {
+	background-color:var(--aubergine);
+	color:white;
+	font-family:Roboto,sans-serif;
+	font-size:var(--medium);
+}
+#container {
+	max-width:768px;
+	margin:1.5rem auto;
+	position:relative;
+	height:calc(100vh - 3rem);
+}
+#logo {
+	text-align:center;
+}
+#logo img {
+	max-height:12em;
+	margin:2rem 2rem 4rem 2rem;
+}
+/* FORMS */
+.form-group {
+	background-color:transparent;
+	border:0;
+	text-align:center;
+}
+.form-group label,
+.form-group small {
+	color:white!important;
+}
+#pin {
+	font-size:var(--large);
+	font-family:monospace;
+	width:18rem;
+	letter-spacing:0.5rem;
+	margin:auto;
+	text-align:center;
+}
