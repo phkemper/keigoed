@@ -9,5 +9,7 @@
   	@if(!Request::is('register'))
   		<a class="btn btn-light" href="/register">{{ __('auth.register') }}</a>
   	@endif
+  @else
+  	<a class="btn btn-light" href="/dashboard">{{ __('admin.dashboard') }}</a>
   @endif
 </nav>
