@@ -10,6 +10,9 @@
   		<a class="btn btn-light" href="/register">{{ __('auth.register') }}</a>
   	@endif
   @else
+  	@if(!Request::is('/'))
+  		<a class="btn btn-light" href="/">{{ __('auth.home') }}</a>
+  	@endif
   	@if(!Request::is('dashboard'))
   		<a class="btn btn-light" href="/dashboard">{{ __('admin.dashboard') }}</a>
   	@endif
