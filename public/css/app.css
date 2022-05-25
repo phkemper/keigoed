@@ -20,12 +20,16 @@ nav {
 	text-align:center;
 	width:100%;
 }
-/* PLAYER ELEMENTS */
+h1,h2 {
+	text-align:center;
+	font-family:Bangers,Helvetica,Arial,sans-serif;
+}
 body {
 	background-color:var(--aubergine);
 	color:white;
 	font-family:Roboto,sans-serif;
 	font-size:var(--medium);
+	padding:1rem;
 }
 #container {
 	max-width:768px;
@@ -58,3 +62,5 @@ body {
 	margin:auto;
 	text-align:center;
 }
+/* PLAYER ELEMENTS */
+
