@@ -16,6 +16,12 @@ return new class extends Migration
         Schema::create('user_answers', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
+            $table->bigInteger('userid')->unsigned()->default(null)->index();
+            $table->bigInteger('answerid')->unsigned()->default(null)->index();
+            $table->integer('millis')->unsigned()->default(null);
+            
+            $table->foreign('userid')->references('id')->on('users');
+            $table->foreign('answerid')->references('id')->on('answers');
         });
     }
 

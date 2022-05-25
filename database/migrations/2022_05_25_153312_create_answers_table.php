@@ -13,9 +13,15 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('pricing_plans', function (Blueprint $table) {
+        Schema::create('answers', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
+            $table->bigInteger('questionid')->unsigned()->default(null)->index();
+            $table->text('answertext')->default(null);
+            $table->mediumText('answerimage')->default(null);
+            $table->boolean('correct')->default(false);
+            
+            $table->foreign('questionid')->references('id')->on('questions');
         });
     }
 
@@ -26,6 +32,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('pricing_plans');
+        Schema::dropIfExists('answers');
     }
 };
