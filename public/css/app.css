@@ -44,6 +44,12 @@ body {
 	max-height:12em;
 	margin:2rem 2rem 4rem 2rem;
 }
+@media screen and (max-width:768px) {
+	#logo img {
+	 max-height:6em;
+	 margin:1rem 1rem 2rem 1rem;
+	}
+}
 /* FORMS */
 .form-group {
 	background-color:transparent;
@@ -54,6 +60,24 @@ body {
 .form-group small {
 	color:white!important;
 }
+/* ADMIN ELEMENTS */
+textarea.form-control {
+	height:5rem;
+}
+.errors {
+	margin:0;
+	list-style-type:none;
+}
+.errors li {
+	text-align:center;
+	color:var(--red);
+}
+@media screen and (max-width:768px) {
+	.errors li {
+	 font-size:80%;
+	}
+}
+/* PLAYER ELEMENTS */
 #pin {
 	font-size:var(--large);
 	font-family:monospace;
@@ -62,5 +86,4 @@ body {
 	margin:auto;
 	text-align:center;
 }
-/* PLAYER ELEMENTS */
 

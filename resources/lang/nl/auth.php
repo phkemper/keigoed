@@ -1,6 +1,6 @@
 <?php
 return [
-    'home' => 'Home',
+    'home' => 'Startpagina',
     'login' => 'Log in',
     'register' => 'Registreer',
     'logout' => 'Log uit',

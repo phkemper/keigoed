@@ -7,6 +7,9 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use App\Models\Quiz;
+use App\Models\UserQuiz;
+use App\Models\Role;
 
 class User extends Authenticatable
 {
@@ -41,4 +44,20 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+    
+    /**
+     * Quizzes for this user.
+     */
+    public function quizzes()
+    {
+        return $this->hasManyThrough(Quiz::class, UserQuiz::class, 'userid', 'quizid', 'id', 'id');
+    }
+    
+    /**
+     * Quizzes the user is admin of.
+     */
+    public function ownsQuizzes()
+    {
+        return $this->quizzes()->where('user_quizzes.roleid', Role::QUIZMASTER);
+    }
 }
