@@ -18,6 +18,8 @@ return new class extends Migration
             $table->timestamps();
             $table->string('name', 255)->default('')->unique();
         });
+        
+        DB::table('roles')->insert(['id' => 1, 'name' => 'Quizmaster']);
     }
 
     /**
