@@ -45,7 +45,7 @@ class QuizController extends Controller
         $quiz = new Quiz;
         $quiz->pin = Quiz::generatePIN();
         $quiz->name = $request->input('name');
-        $quiz->introtext = $request->input('introtext', null);
+        $quiz->introtext = strlen($request->input('introtext')) ? $request->input('introtext') : ' ';
         if ( $request->file('introimage') )
         {
             $mime = $request->file('introimage')->getMimeType();
@@ -55,7 +55,7 @@ class QuizController extends Controller
         {
             $quiz->introimage = '';
         }
-        $quiz->outrotext = $request->input('outrotext', null);
+        $quiz->outrotext = strlen($request->input('outrotext')) ? $request->input('outrotext') : ' ';
         if ( $request->file('outroimage') )
         {
             $mime = $request->file('outroimage')->getMimeType();
@@ -78,11 +78,19 @@ class QuizController extends Controller
     }
     
     /**
-     * Show a single quiz.
+     * Show a single quiz for editing.
      */
     public function show(Request $request, $id)
     {
+        $quiz = Quiz::where('id', $id)->first();
         
+        // Check if the user is the quizmaster.
+        if ( !$quiz || !Auth::user()->isQuizMaster($quiz) )
+        {
+            return redirect('/quizzes')->withErrors(['msg' => __('quiz.notfound')]);
+        }
+        
+        return view('quizzes.edit', ['quiz' => $quiz]);
     }
     
     /**
@@ -90,7 +98,63 @@ class QuizController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $validated = $request->validate([
+            'name' => 'required|max:255',
+            'introimage' => 'image|mimes:jpg,jpeg,png|max:1024',
+            'outroimage' => 'image|mimes:jpg,jpeg,png|max:1024',
+        ]);
         
+        // Get the quiz if it exists.
+        $quiz = Quiz::where('id', $id)->first();
+        
+        // Check if the user is the quizmaster.
+        if ( !$quiz || !Auth::user()->isQuizMaster($quiz))
+        {
+            return redirect('/quizzes')->withErrors(['msg' => __('quiz.notfound')]);
+        }
+        
+        $quiz->name = $request->input('name');
+        $quiz->introtext = $request->input('introtext', null);
+        if ( $request->file('introimage') )
+        {
+            $mime = $request->file('introimage')->getMimeType();
+            $quiz->introimage = 'data:' . $mime . ';base64,' . base64_encode(file_get_contents($request->file('introimage')->getRealPath()));
+        }
+        elseif ( $request->input('introimagedelete', false))
+        {
+            $quiz->introimage = '';
+        }
+        $quiz->outrotext = $request->input('outrotext', null);
+        if ( $request->file('outroimage') )
+        {
+            $mime = $request->file('outroimage')->getMimeType();
+            $quiz->outroimage = 'data:' . $mime . ';base64,' . base64_encode(file_get_contents($request->file('outroimage')->getRealPath()));
+        }
+        elseif ( $request->input('outroimagedelete', false))
+        {
+            $quiz->outroimage = '';
+        }
+        $quiz->save();
+        
+        return redirect('/quizzes')->with('status', __('quiz.saved'));
+    }
+    
+    /**
+     * Verify deletion.
+     */
+    public function delete(Request $request, $id)
+    {
+        // Get the quiz if it exists.
+        $quiz = Quiz::where('id', $id)->first();
+        
+        // Check if the user is the quizmaster.
+        if ( !$quiz || !Auth::user()->isQuizMaster($quiz))
+        {
+            return redirect('/quizzes')->withErrors(['msg' => __('quiz.notfound')]);
+        }
+        
+        // Show delete verification message.
+        return view('quizzes.delete', ['quiz' => $quiz]);
     }
     
     /**
@@ -98,7 +162,20 @@ class QuizController extends Controller
      */
     public function destroy(Request $request, $id)
     {
+        // Get the quiz if it exists.
+        $quiz = Quiz::where('id', $id)->first();
         
+        // Check if the user is the quizmaster.
+        if ( !$quiz || !Auth::user()->isQuizMaster($quiz))
+        {
+            return redirect('/quizzes')->withErrors(['msg' => __('quiz.notfound')]);
+        }
+        
+        DB::table('user_quizzes')->where('userid', Auth::user()->id)->where('quizid', $id)->delete();
+        
+        DB::table('quizzes')->where('id', $id)->delete();
+        
+        return redirect('/quizzes')->with('status', __('quiz.deleted'));
     }
     
     /**

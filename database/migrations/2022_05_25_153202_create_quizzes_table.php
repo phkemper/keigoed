@@ -17,9 +17,9 @@ return new class extends Migration
             $table->id();
             $table->timestamps();
             $table->string('name', 255)->default('Name')->index();
-            $table->text('introtext')->default(null);
+            $table->text('introtext')->nullable()->default(null);
             $table->mediumText('introimage')->default(null);
-            $table->text('outrotext')->default(null);
+            $table->text('outrotext')->nullable()->default(null);
             $table->mediumText('outroimage')->default(null);
             $table->integer('pin')->unsigned()->unique();
             $table->bigInteger('pricingplanid')->unsigned()->default(null);

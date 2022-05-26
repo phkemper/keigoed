@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use App\Models\Quiz;
 use App\Models\UserQuiz;
 use App\Models\Role;
@@ -46,18 +48,37 @@ class User extends Authenticatable
     ];
     
     /**
-     * Quizzes for this user.
-     */
-    public function quizzes()
-    {
-        return $this->hasManyThrough(Quiz::class, UserQuiz::class, 'userid', 'quizid', 'id', 'id');
-    }
-    
-    /**
-     * Quizzes the user is admin of.
+     * Quizzes the user is quiz master of.
+     * 
+     * @return Quiz[]
      */
     public function ownsQuizzes()
     {
-        return $this->quizzes()->where('user_quizzes.roleid', Role::QUIZMASTER);
+        $userID = Auth::user()->id;
+        
+        return DB::table('quizzes')
+            ->join('user_quizzes', 'user_quizzes.quizid', '=', 'quizzes.id')
+            ->where('user_quizzes.roleid', Role::QUIZMASTER)
+            ->where('user_quizzes.userid', $userID)
+            ->orderBy('quizzes.created_at', 'desc')
+            ->select('quizzes.id', 'quizzes.name')
+            ->get();
+    }
+    
+    /**
+     * Check if a user is quizmaster of a quiz.
+     * 
+     * @param Quiz $quiz
+     *   Quiz to check.
+     * @return boolean
+     */
+    public function isQuizMaster(Quiz $quiz)
+    {
+        $uq = UserQuiz::where('quizid', $quiz->id)
+        ->where('userid', $this->id)
+        ->where('roleid', Role::QUIZMASTER)
+        ->first();
+        
+        return !empty($uq);
     }
 }

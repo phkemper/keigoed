@@ -18,6 +18,7 @@
 
     </head>
     <body>
+        @include('layouts.navigation')
     	<div id="container">
             <div id="logo">
             	<img src="{{ asset('img/keigoed-quiz-tut-logo.svg') }}"/>
@@ -25,7 +26,6 @@
             <div>
                 {{ $slot }}
             </div>
-            @include('layouts.navigation')
 		</div>
 		
         <!-- Scripts -->

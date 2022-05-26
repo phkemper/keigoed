@@ -11,16 +11,6 @@ class Quiz extends Model
 {
     use HasFactory;
     
-    public function questions()
-    {
-        return $this->hasMany(Question::class);
-    }
-    
-    public function users()
-    {
-        return $this->hasMany(User::class);
-    }
-    
     /**
      * Generate a unique PIN.
      * 

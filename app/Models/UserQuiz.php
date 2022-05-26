@@ -10,9 +10,4 @@ class UserQuiz extends Model
 {
     use HasFactory;
     
-    public function quizzes()
-    {
-        return $this->hasMany(Quiz::class);
-    }
-    
 }
