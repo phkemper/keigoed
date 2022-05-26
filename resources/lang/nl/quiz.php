@@ -1,6 +1,10 @@
 <?php
 return [
     'quizzes' => 'Mijn KEIGOED\'s',
+    'actionedit' => 'Wijzig KEIGOED! algemene instellingen',
+    'actionquestions' => 'Wijzig de vragen van je KEIGOED!',
+    'actionrun' => 'Start je KEIGOED!',
+    'actiondelete' => 'Verwijder je KEIGOED!',
     'add' => 'Maak een nieuwe KEIGOED!',
     'name' => 'Geef je KEIGOED! een naam',
     'introtext' => 'Introductietekst voor het startscherm',
