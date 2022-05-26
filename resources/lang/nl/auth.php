@@ -24,4 +24,6 @@ return [
     'confirm' => 'Wachtwoord bevestigen',
     'secure' => 'Dit is een beveiligd deel van KEIGOED! Bevestig je wachtwoord, voordat je verder kunt.',
     'confirmsubmit' => 'Bevestig wachtwoord',
+    'failed' => 'Inloggen mislukt.',
+    'wrong' => 'Iets ging niet zoals het moest.',
 ];
