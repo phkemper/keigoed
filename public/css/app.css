@@ -85,17 +85,26 @@ textarea.form-control {
 	 font-size:80%;
 	}
 }
-table {
+#quizzes {
 	margin:1rem auto;
 }
-.quizactions {
-	white-space:nowrap;
+.quiz:first-child {
+	border-top:1px solid var(--grey);
+}
+.quiz {
+	border-bottom:1px solid var(--grey);
+	padding:0.25rem 0;
 }
 .quizname {
 	width:100%;
 	padding-left:0.5rem;
 	white-space:nowrap;
 	overflow:hidden;
+	font-weight:bold;
+}
+.quiz .actions {
+	white-space:nowrap;
+	text-align:right;
 }
 /* PLAYER ELEMENTS */
 #pin {
