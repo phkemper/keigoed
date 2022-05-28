@@ -3,7 +3,7 @@
 	<form method="post" id="question-create" action="/quizzes/{{ $quiz->id }}/questions" enctype="multipart/form-data">
 		@csrf
 		<div class="form-group">
-			<textarea class="form-control" name="questiontext" id="questiontext" placeholder="{{ __('question.questiontext') }}">{{ old('questiontext') }}</textarea>
+			<textarea class="form-control" name="questiontext" id="questiontext" placeholder="{{ __('question.questiontext') }}" autofocus>{{ old('questiontext') }}</textarea>
 		</div>
 		<div class="form-group">
 		    <label for="questionimage">{{ __('question.questionimage') }}</label>

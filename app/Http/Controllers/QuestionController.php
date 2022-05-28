@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use App\Models\Quiz;
 use App\Models\Question;
+use App\Models\Answer;
 
 class QuestionController extends Controller
 {
@@ -95,7 +97,7 @@ class QuestionController extends Controller
         }
         $question->save();
         
-        return redirect('/quizzes/' . $quiz->id . '/questions');
+        return redirect('/quizzes/' . $quiz->id . '/questions#question-' . $question->id);
     }
     
     /**
@@ -178,6 +180,164 @@ class QuestionController extends Controller
         }
         $question->save();
         
-        return redirect('/quizzes/' . $quizid . '/questions')->with('status', __('question.saved'));
+        return redirect('/quizzes/' . $quizid . '/questions#question-' . $questionid)->with('status', __('question.saved'));
+    }
+
+    /**
+     * Verify deletion.
+     *
+     * @param integer $quizid
+     *   Quiz ID.
+     * @param integer $questionid
+     *   Question ID.
+     */
+    public function delete(Request $request, $quizid, $questionid)
+    {
+        // Get the quiz if it exists.
+        $quiz = Quiz::where('id', $quizid)->first();
+        
+        // Check if the user is the quizmaster.
+        if ( !$quiz || !Auth::user()->isQuizMaster($quiz))
+        {
+            return redirect('/quizzes/' . $quizid . '/questions')->withErrors(['msg' => __('question.notfound')]);
+        }
+        
+        $question = Question::find($questionid);
+        if ( !$question )
+        {
+            return redirect('/quizzes/' . $quizid . '/questions')->withErrors(['msg' => __('question.notfound')]);
+        }
+        
+        // Show delete verification message.
+        return view('questions.delete', ['quiz' => $quiz, 'question' => $question]);
+    }
+    
+    /**
+     * Delete an existing quiz.
+     *
+     * @param integer $quizid
+     *   Quiz ID.
+     * @param integer $questionid
+     *   Question ID.
+     */
+    public function destroy(Request $request, $quizid, $questionid)
+    {
+        // Get the quiz if it exists.
+        $quiz = Quiz::where('id', $quizid)->first();
+        
+        // Check if the user is the quizmaster.
+        if ( !$quiz || !Auth::user()->isQuizMaster($quiz))
+        {
+            return redirect('/quizzes/' . $quizid . '/questions')->withErrors(['msg' => __('question.notfound')]);
+        }
+        
+        $question = Question::find($questionid);
+        if ( !$question )
+        {
+            return redirect('/quizzes/' . $quizid . '/questions')->withErrors(['msg' => __('question.notfound')]);
+        }
+        
+        $answers = Answer::where('questionid', $questionid)->get();
+        foreach ( $answers as $answer )
+        {
+            DB::table('user_answers')->where('answerid', $answer->id)->delete();
+            $answer->delete();
+        }
+        
+        $question->delete();
+        
+        $this->reSequence($quizid);
+        
+        return redirect('/quizzes/' . $quizid . '/questions')->with('status', __('question.deleted'));
+    }
+    
+    /**
+     * Move question up.
+     *
+     * @param integer $quizid
+     *   Quiz ID.
+     * @param integer $questionid
+     *   Question ID.
+     */
+    public function up(Request $request, $quizid, $questionid)
+    {
+        // Get the quiz if it exists.
+        $quiz = Quiz::where('id', $quizid)->first();
+        
+        // Check if the user is the quizmaster.
+        if ( !$quiz || !Auth::user()->isQuizMaster($quiz))
+        {
+            return redirect('/quizzes/' . $quizid . '/questions')->withErrors(['msg' => __('question.notfound')]);
+        }
+        
+        $question = Question::find($questionid);
+        if ( !$question )
+        {
+            return redirect('/quizzes/' . $quizid . '/questions')->withErrors(['msg' => __('question.notfound')]);
+        }
+        
+        $previousQuestion = Question::where('seqnr', '<', $question->seqnr)->orderBy('seqnr', 'desc')->first();
+        $question->seqnr--;
+        $question->save();
+        $previousQuestion->seqnr++;
+        $previousQuestion->save();
+        
+        $this->reSequence($quizid);
+        
+        return redirect('/quizzes/' . $quizid . '/questions#question-' . $questionid);
+    }
+    
+    /**
+     * Move question down.
+     *
+     * @param integer $quizid
+     *   Quiz ID.
+     * @param integer $questionid
+     *   Question ID.
+     */
+    public function down(Request $request, $quizid, $questionid)
+    {
+        // Get the quiz if it exists.
+        $quiz = Quiz::where('id', $quizid)->first();
+        
+        // Check if the user is the quizmaster.
+        if ( !$quiz || !Auth::user()->isQuizMaster($quiz))
+        {
+            return redirect('/quizzes/' . $quizid . '/questions')->withErrors(['msg' => __('question.notfound')]);
+        }
+        
+        $question = Question::find($questionid);
+        if ( !$question )
+        {
+            return redirect('/quizzes/' . $quizid . '/questions')->withErrors(['msg' => __('question.notfound')]);
+        }
+        
+        $nextQuestion = Question::where('seqnr', '>', $question->seqnr)->orderBy('seqnr', 'asc')->first();
+        $question->seqnr++;
+        $question->save();
+        $nextQuestion->seqnr--;
+        $nextQuestion->save();
+        
+        $this->reSequence($quizid);
+        
+        return redirect('/quizzes/' . $quizid . '/questions#question-' . $questionid);
+    }
+    
+    /**
+     * Resequence all questions, so the sequence number starts at 1
+     * and incrementsbij one for every question.
+     * 
+     * @param integer $quizid
+     *   Quiz ID.
+     */
+    public function reSequence($quizid)
+    {
+        $questions = Question::where('quizid', $quizid)->orderBy('seqnr')->get();
+        
+        foreach ( $questions as $index => $question )
+        {
+            $question->seqnr = $index + 1;
+            $question->save();
+        }
     }
 }

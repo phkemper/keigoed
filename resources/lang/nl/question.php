@@ -20,5 +20,9 @@ return [
     'cancel' => 'Terug naar de vragen',
     'notfound' => 'De vraag die je zoekt, kan ik niet vinden.',
     'saved' => 'Je vraag is aangepast.',
+    'delete' => 'De vraag verwijderen',
+    'deletesure' => 'Weet je zeker dat je deze vraag wilt verwijderen?',
+    'deletebutton' => 'Verwijder de vraag',
+    'deleted' => 'De vraag is verwijderd.',
     
 ];

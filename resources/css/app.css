@@ -15,11 +15,18 @@
 }
 
 /* GENERAL ELEMENTS */
+html {
+		padding:0.5rem;
+}
 nav {
 	position:absolute;
-	top:0.25rem;
+	top:-45px;
 	text-align:center;
 	width:100%;
+}
+.guest nav {
+	top:auto;
+	bottom:0.25rem;
 }
 h1,h2 {
 	text-align:center;
@@ -30,7 +37,6 @@ body {
 	color:white;
 	font-family:Roboto,sans-serif;
 	font-size:var(--medium);
-	padding:0.5rem;
 	position:relative;
 }
 #container {
@@ -38,6 +44,9 @@ body {
 	margin:0 auto 0.5rem auto;
 	position:relative;
 	height:calc(100vh - 3rem);
+}
+main {
+	padding-bottom:2rem;
 }
 #logo {
 	margin-top:40px;

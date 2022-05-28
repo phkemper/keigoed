@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use App\Models\Quiz;
+use App\Models\Question;
+use App\Models\Answer;
 use App\Models\PricingPlan;
 use App\Models\Role;
 use App\Models\UserQuiz;
@@ -181,6 +183,18 @@ class QuizController extends Controller
         if ( !$quiz || !Auth::user()->isQuizMaster($quiz))
         {
             return redirect('/quizzes')->withErrors(['msg' => __('quiz.notfound')]);
+        }
+        
+        $questions = Question::where('quizid', $quizid)->get();
+        foreach ( $questinos as $question )
+        {
+            $answers = Answer::where('questionid', $questionid)->get();
+            foreach ( $answers as $answer )
+            {
+                DB::table('user_answers')->where('answerid', $answer->id)->delete();
+                $answer->delete();
+            }
+            $question->delete();
         }
         
         DB::table('user_quizzes')->where('userid', Auth::user()->id)->where('quizid', $id)->delete();

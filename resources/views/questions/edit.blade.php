@@ -3,7 +3,7 @@
 	<form method="post" id="question-edit" action="/quizzes/{{ $quiz->id }}/questions/{{ $question->id }}" enctype="multipart/form-data">
 		@csrf
 		<div class="form-group">
-			<textarea class="form-control" name="questiontext" id="questiontext" placeholder="{{ __('question.questiontext') }}">{{ $question->questiontext }}</textarea>
+			<textarea class="form-control" name="questiontext" id="questiontext" placeholder="{{ __('question.questiontext') }}" autofocus>{{ $question->questiontext }}</textarea>
 			@if ( $errors->get('questiontext') )
 				<ul class="errors">
     			@foreach ($errors->get('questiontext') as $message)
@@ -22,7 +22,7 @@
     	@endif
 		<div class="form-group">
 		    <label for="questionimage">{{ __('question.newquestionimage') }}</label>
-			<input type="file" class="form-control" name="questionimage" id="questonimage" />
+			<input type="file" class="form-control" name="questionimage" id="questionimage" />
 			@if ( $errors->get('questionimage') )
 				<ul class="errors">
     			@foreach ($errors->get('questinoimage') as $message)
@@ -62,7 +62,7 @@
 		</div>
 		<div class="form-group">
 			<p><button type="submit" class="btn btn-primary form-control" id="submit">{{ __('question.savebutton') }}</button></p>
-			<p><a class="btn btn-secondary form-control" id="cancel" href="/quizzes/{{ $quiz->id }}/questions">{{ __('question.cancel') }}</a></p>
+			<p><a class="btn btn-secondary form-control" id="cancel" href="/quizzes/{{ $quiz->id }}/questions#question-{{ $question->id }}">{{ __('question.cancel') }}</a></p>
 		</div>
 	</form>
 </x-app-layout>

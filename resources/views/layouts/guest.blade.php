@@ -17,8 +17,7 @@
         <link rel="stylesheet" href="{{ asset('css/app.css') }}">
 
     </head>
-    <body>
-        @include('layouts.navigation')
+    <body class="guest">
     	<div id="container">
             <div id="logo">
             	<img src="{{ asset('img/keigoed-quiz-tut-logo.svg') }}"/>
@@ -27,6 +26,7 @@
                 {{ $slot }}
             </div>
 		</div>
+        @include('layouts.navigation')
 		
         <!-- Scripts -->
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

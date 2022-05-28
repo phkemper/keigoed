@@ -3,6 +3,10 @@
 	<form action="/" method="post">
 		@csrf
 		<div class="form-group">
+			<label for="nickname">{{ __('player.nickname') }}</label>
+			<input type="text" class="form-control" id="nickname" autofocus>
+		</div>
+		<div class="form-group">
 			<label for="pin">{{ __('player.enterpin') }}</label>
 			<input type="text" class="form-control" id="pin" maxlength="6" placeholder="------" autofocus>
 			<small id="emailHelp" class="form-text text-muted">{{ __('player.getpin') }}</small>
