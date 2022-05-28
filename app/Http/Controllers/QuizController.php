@@ -45,7 +45,7 @@ class QuizController extends Controller
         $quiz = new Quiz;
         $quiz->pin = Quiz::generatePIN();
         $quiz->name = $request->input('name');
-        $quiz->introtext = strlen($request->input('introtext')) ? $request->input('introtext') : ' ';
+        $quiz->introtext = strlen($request->input('introtext')) ? $request->input('introtext') : null;
         if ( $request->file('introimage') )
         {
             $mime = $request->file('introimage')->getMimeType();
@@ -55,7 +55,7 @@ class QuizController extends Controller
         {
             $quiz->introimage = '';
         }
-        $quiz->outrotext = strlen($request->input('outrotext')) ? $request->input('outrotext') : ' ';
+        $quiz->outrotext = strlen($request->input('outrotext')) ? $request->input('outrotext') : null;
         if ( $request->file('outroimage') )
         {
             $mime = $request->file('outroimage')->getMimeType();

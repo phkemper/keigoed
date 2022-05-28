@@ -83,7 +83,7 @@ class QuestionController extends Controller
         {
             $question->questionimage = '';
         }
-        $question->explaintext = strlen($request->input('explaintext')) ? $request->input('explaintext') : ' ';
+        $question->explaintext = strlen($request->input('explaintext')) ? $request->input('explaintext') : null;
         if ( $request->file('explainimage') )
         {
             $mime = $request->file('explainimage')->getMimeType();

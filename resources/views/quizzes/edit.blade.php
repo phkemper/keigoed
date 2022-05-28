@@ -14,6 +14,13 @@
 		</div>
 		<div class="form-group">
 			<textarea class="form-control" name="introtext" id="introtext" placeholder="{{ __('quiz.introtext') }}">{{ $quiz->introtext }}</textarea>
+			@if ( $errors->get('introtext') )
+				<ul class="errors">
+    			@foreach ($errors->get('introtext') as $message)
+        			<li>{{ $message }}</li>
+    			@endforeach
+    			</ul>
+    		@endif
 		</div>
 		@if ( strlen($quiz->introimage) ) 
     		<div class="form-group">
@@ -36,6 +43,13 @@
 		</div>
 		<div class="form-group">
 			<textarea class="form-control" name="outrotext" id="outrotext" placeholder="{{ __('quiz.outrotext') }}">{{ $quiz->outrotext }}</textarea>
+			@if ( $errors->get('outrotext') )
+				<ul class="errors">
+    			@foreach ($errors->get('outrotext') as $message)
+        			<li>{{ $message }}</li>
+    			@endforeach
+    			</ul>
+    		@endif
 		</div>
 		@if ( strlen($quiz->outroimage) )
     		<div class="form-group">

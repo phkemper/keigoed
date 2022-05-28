@@ -4,6 +4,13 @@
 		@csrf
 		<div class="form-group">
 			<textarea class="form-control" name="questiontext" id="questiontext" placeholder="{{ __('question.questiontext') }}">{{ $question->questiontext }}</textarea>
+			@if ( $errors->get('questiontext') )
+				<ul class="errors">
+    			@foreach ($errors->get('questiontext') as $message)
+        			<li>{{ $message }}</li>
+    			@endforeach
+    			</ul>
+    		@endif
 		</div>
 		@if ( strlen($question->questionimage) ) 
     		<div class="form-group">
@@ -26,6 +33,13 @@
 		</div>
 		<div class="form-group">
 			<textarea class="form-control" name="explaintext" id="explaintext" placeholder="{{ __('question.explaintext') }}">{{ $question->explaintext }}</textarea>
+			@if ( $errors->get('explaintext') )
+				<ul class="errors">
+    			@foreach ($errors->get('explaintext') as $message)
+        			<li>{{ $message }}</li>
+    			@endforeach
+    			</ul>
+    		@endif
 		</div>
 		@if ( strlen($question->explainimage) )
     		<div class="form-group">
