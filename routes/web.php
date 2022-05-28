@@ -34,5 +34,7 @@ Route::get('/quizzes/{id}/questions/{qid}', [App\Http\Controllers\QuestionContro
 Route::post('/quizzes/{id}/questions/{qid}', [App\Http\Controllers\QuestionController::class, 'update'])->middleware(['auth'])->name('questions.update');
 Route::get('/quizzes/{id}/questions/{qid}/delete', [App\Http\Controllers\QuestionController::class, 'delete'])->middleware(['auth'])->name('questions.delete');
 Route::post('/quizzes/{id}/questions/{qid}/delete', [App\Http\Controllers\QuestionController::class, 'destroy'])->middleware(['auth'])->name('questions.destroy');
+Route::get('/quizzes/{id}/questions/{qid}/up', [App\Http\Controllers\QuestionController::class, 'up'])->middleware(['auth'])->name('questions.up');
+Route::get('/quizzes/{id}/questions/{qid}/down', [App\Http\Controllers\QuestionController::class, 'down'])->middleware(['auth'])->name('questions.down');
 
 require __DIR__.'/auth.php';

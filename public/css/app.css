@@ -95,16 +95,69 @@ textarea.form-control {
 	border-bottom:1px solid var(--grey);
 	padding:0.25rem 0;
 }
-.quizname {
+.quiz .name {
 	width:100%;
 	padding-left:0.5rem;
 	white-space:nowrap;
 	overflow:hidden;
 	font-weight:bold;
 }
+.quiz .details {
+	position:relative;
+	padding: 0 0.25rem;
+	min-height:40px;
+}
+.quiz .info {
+	font-size:80%;
+	display:inline-block;
+}
 .quiz .actions {
+	display:inline-block;
 	white-space:nowrap;
 	text-align:right;
+	float:right;
+}
+.quizname {
+	font-weight:bold;
+	overflow:hidden;
+	white-space:nowrap;
+}
+#questions {
+	margin:1rem auto;
+}
+.question:first-child {
+	border-top:1px solid var(--grey);
+}
+.question {
+	border-bottom:1px solid var(--grey);
+	padding:0.25rem 0;
+}
+.question .questiontext {
+	width:100%;
+	padding-left:0.5rem;
+	white-space:nowrap;
+	overflow:hidden;
+}
+.question .details {
+	position:relative;
+	padding: 0 0.25rem;
+	min-height:40px;
+}
+.question .info {
+	font-size:80%;
+	display:inline-block;
+}
+.question .actions {
+	display:inline-block;
+	white-space:nowrap;
+	text-align:right;
+	float:right;
+}
+.question:first-child .up {
+	display:none;
+}
+.question:last-child .down {
+	display:none;
 }
 /* PLAYER ELEMENTS */
 #pin {

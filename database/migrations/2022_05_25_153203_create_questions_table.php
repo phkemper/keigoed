@@ -18,10 +18,10 @@ return new class extends Migration
             $table->timestamps();
             $table->bigInteger('quizid')->unsigned()->default(null)->index();
             $table->integer('seqnr')->unsigned()->default(0)->index();
-            $table->text('questiontext')->default(null);
-            $table->mediumText('questionimage')->default(null);
-            $table->text('explaintext')->default(null);
-            $table->mediumText('explainimage')->default(null);
+            $table->text('questiontext')->nullable()->default(null);
+            $table->mediumText('questionimage')->nullable()->default(null);
+            $table->text('explaintext')->nullable()->default(null);
+            $table->mediumText('explainimage')->nullable()->default(null);
             
             $table->foreign('quizid')->references('id')->on('quizzes');
         });

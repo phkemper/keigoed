@@ -25,4 +25,5 @@ return [
     'deletesure' => 'Weet je zeker dat je deze KEIGOED! wilt verwijderen?',
     'deletebutton' => 'Verwijder mijn KEIGOED!',
     'deleted' => 'Je KEIGOED! is verwijderd.',
+    'expires' => 'Wordt verwijderd op :date',
 ];

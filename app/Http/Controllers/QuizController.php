@@ -79,6 +79,9 @@ class QuizController extends Controller
     
     /**
      * Show a single quiz for editing.
+     * 
+     * @param integer $id
+     *   Quiz ID.
      */
     public function show(Request $request, $id)
     {
@@ -95,6 +98,9 @@ class QuizController extends Controller
     
     /**
      * Update existing quiz.
+     * 
+     * @param integer $id
+     *   Quiz ID.
      */
     public function update(Request $request, $id)
     {
@@ -141,6 +147,9 @@ class QuizController extends Controller
     
     /**
      * Verify deletion.
+     * 
+     * @param integer $id
+     *   Quiz ID.
      */
     public function delete(Request $request, $id)
     {
@@ -159,6 +168,9 @@ class QuizController extends Controller
     
     /**
      * Delete an existing quiz.
+     * 
+     * @param integer $id
+     *   Quiz ID.
      */
     public function destroy(Request $request, $id)
     {
@@ -179,7 +191,10 @@ class QuizController extends Controller
     }
     
     /**
-     * Rund the quiz.
+     * Run the quiz.
+     * 
+     * @param integer $id
+     *   Quiz ID.
      */
     public function run(Request $request, $id)
     {

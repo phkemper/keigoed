@@ -56,13 +56,23 @@ class User extends Authenticatable
     {
         $userID = Auth::user()->id;
         
-        return DB::table('quizzes')
+        $quizzes = DB::table('quizzes')
             ->join('user_quizzes', 'user_quizzes.quizid', '=', 'quizzes.id')
             ->where('user_quizzes.roleid', Role::QUIZMASTER)
             ->where('user_quizzes.userid', $userID)
             ->orderBy('quizzes.created_at', 'desc')
-            ->select('quizzes.id', 'quizzes.name')
+            ->select('quizzes.id', 'quizzes.name', 'quizzes.created_at')
             ->get();
+        
+        if ( $quizzes )
+        {
+            foreach ( $quizzes as $quiz )
+            {
+                $quiz->expires = strftime(__('general.datefmt'), strtotime($quiz->created_at) + 30*24*60*60);
+            }
+        }
+        
+        return $quizzes;
     }
     
     /**

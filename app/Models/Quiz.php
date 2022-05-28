@@ -27,4 +27,17 @@ class Quiz extends Model
             }
         }
     }
+    
+    /**
+     * Return the questions.
+     *
+     * @return Question[]
+     */
+    public function getQuestions()
+    {
+        $questions = Question::where('quizid', $this->id)
+                    ->orderBy('seqnr')->get();
+        
+        return $questions;
+    }
 }
