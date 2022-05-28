@@ -212,6 +212,41 @@ class QuizController extends Controller
      */
     public function run(Request $request, $id)
     {
+        // Get the quiz if it exists.
+        $quiz = Quiz::where('id', $id)->first();
         
+        // Check if the user is the quizmaster.
+        if ( !$quiz || !Auth::user()->isQuizMaster($quiz))
+        {
+            return redirect('/quizzes')->withErrors(['msg' => __('quiz.notfound')]);
+        }
+        
+        $quiz->started_at = strftime('%Y-%m-%d %H:%M:%S');
+        $quiz->save();
+        
+        return view('quizzes.run', ['quiz' => $quiz]);
+    }
+    
+    /**
+     * Stop the quiz.
+     * 
+     * @param integer $id
+     *   Quiz ID.
+     */
+    public function stop(Request $request, $id)
+    {
+        // Get the quiz if it exists.
+        $quiz = Quiz::where('id', $id)->first();
+        
+        // Check if the user is the quizmaster.
+        if ( !$quiz || !Auth::user()->isQuizMaster($quiz))
+        {
+            return redirect('/quizzes')->withErrors(['msg' => __('quiz.notfound')]);
+        }
+        
+        $quiz->started_at = null;
+        $quiz->save();
+        
+        return redirect('/quizzes')->with('status', __('quiz.stopped'));
     }
 }

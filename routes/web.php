@@ -26,6 +26,7 @@ Route::post('/quizzes/{id}', [App\Http\Controllers\QuizController::class, 'updat
 Route::get('/quizzes/{id}/delete', [App\Http\Controllers\QuizController::class, 'delete'])->middleware(['auth'])->name('quizzes.delete');
 Route::post('/quizzes/{id}/delete', [App\Http\Controllers\QuizController::class, 'destroy'])->middleware(['auth'])->name('quizzes.destroy');
 Route::get('/quizzes/{id}/run', [App\Http\Controllers\QuizController::class, 'run'])->middleware(['auth'])->name('quizzes.run');
+Route::get('/quizzes/{id}/stop', [App\Http\Controllers\QuizController::class, 'stop'])->middleware(['auth'])->name('quizzes.stop');
 
 Route::get('/quizzes/{id}/questions', [App\Http\Controllers\QuestionController::class, 'index'])->middleware(['auth'])->name('questions.index');
 Route::get('/quizzes/{id}/questions/create', [App\Http\Controllers\QuestionController::class, 'create'])->middleware(['auth'])->name('questions.create');

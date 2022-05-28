@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('quizzes', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
+            $table->timestamp('started_at')->nullable()->default(null);
             $table->string('name', 255)->default('Name')->index();
             $table->text('introtext')->nullable()->default(null);
             $table->mediumText('introimage')->nullable()->default(null);

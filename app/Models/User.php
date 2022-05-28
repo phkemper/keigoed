@@ -61,7 +61,7 @@ class User extends Authenticatable
             ->where('user_quizzes.roleid', Role::QUIZMASTER)
             ->where('user_quizzes.userid', $userID)
             ->orderBy('quizzes.created_at', 'desc')
-            ->select('quizzes.id', 'quizzes.name', 'quizzes.created_at')
+            ->select('quizzes.id', 'quizzes.name', 'quizzes.created_at', 'quizzes.started_at')
             ->get();
         
         if ( $quizzes )

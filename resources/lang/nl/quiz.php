@@ -26,4 +26,7 @@ return [
     'deletebutton' => 'Verwijder mijn KEIGOED!',
     'deleted' => 'Je KEIGOED! is verwijderd.',
     'expires' => 'Wordt verwijderd op :date',
+    'started' => 'Je KEIGOED! is gestart',
+    'startmessage' => 'De KEIGOED! staat open voor deelnemers. Zij kunnen zich nu registreren met de volgende PIN:',
+    'stopped' => 'Je KEIGOED! is gestopt. Deelnemers kunnen niet meer meedoen. Bestaande deelnemers zien de KEIGOED! niet meer.',
 ];
