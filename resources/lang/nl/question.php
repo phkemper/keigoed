@@ -24,5 +24,17 @@ return [
     'deletesure' => 'Weet je zeker dat je deze vraag wilt verwijderen?',
     'deletebutton' => 'Verwijder de vraag',
     'deleted' => 'De vraag is verwijderd.',
-    
+    'answercorrect' => 'Dit is het juiste antwoord',
+    'answera' => 'A',
+    'answeratext' => 'Antwoord',
+    'explainansweraimage' => 'Plaatje bij antwoord A (optioneel)',
+    'answerb' => 'B',
+    'answerbtext' => 'Antwoord',
+    'explainanswerbimage' => 'Plaatje bij antwoord B (optioneel)',
+    'answerc' => 'C (optioneel)',
+    'answerctext' => 'Antwoord',
+    'explainanswercimage' => 'Plaatje bij antwoord C (optioneel)',
+    'answerd' => 'D (optioneel)',
+    'answerdtext' => 'Antwoord',
+    'explainanswerdimage' => 'Plaatje bij antwoord D (optioneel)',
 ];

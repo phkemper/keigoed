@@ -17,8 +17,9 @@ return new class extends Migration
             $table->id();
             $table->timestamps();
             $table->bigInteger('questionid')->unsigned()->default(null)->index();
-            $table->text('answertext')->default(null);
-            $table->mediumText('answerimage')->default(null);
+            $table->integer('seqnr')->unsigned()->default(0)->index();
+            $table->text('answertext')->nullable()->default(null);
+            $table->mediumText('answerimage')->nullable()->default(null);
             $table->boolean('correct')->default(false);
             
             $table->foreign('questionid')->references('id')->on('questions');

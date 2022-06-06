@@ -224,7 +224,7 @@ class QuizController extends Controller
         $quiz->started_at = strftime('%Y-%m-%d %H:%M:%S');
         $quiz->save();
         
-        return view('quizzes.run', ['quiz' => $quiz]);
+        return view('quizzes.start', ['quiz' => $quiz]);
     }
     
     /**

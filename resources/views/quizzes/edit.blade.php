@@ -26,7 +26,7 @@
     		<div class="form-group">
     			<p><img src="{{ $quiz->introimage }}" style="width:50%;"/></p>
     			<label for="introimagedelete">
-    				<input type="checkbox" style="form-control" name="introimagedelete" id="introimagedelete"/> {{ __('quiz.introimagedelete') }}
+    				<input type="checkbox" class="form-control" name="introimagedelete" id="introimagedelete"/> {{ __('quiz.introimagedelete') }}
     			</label>
     		</div>
     	@endif
@@ -55,7 +55,7 @@
     		<div class="form-group">
     			<p><img src="{{ $quiz->outroimage }}" style="width:50%;"/></p>
     			<label for="outroimagedelete">
-    				<input type="checkbox" style="form-control" name="outroimagedelete" id="outroimagedelete"/> {{ __('quiz.outroimagedelete') }}
+    				<input type="checkbox" class="form-control" name="outroimagedelete" id="outroimagedelete"/> {{ __('quiz.outroimagedelete') }}
     			</label>
     		</div>
     	@endif

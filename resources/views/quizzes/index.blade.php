@@ -12,7 +12,7 @@
 					<div class="name">{{ $quiz->name }}</div>
 					<div class="details">
     					<div class="info">
-    						{{ __('quiz.expires', ['date' => $quiz->expires ]) }}
+    						{!! __('quiz.expires', ['date' => $quiz->expires ]) !!}
     					</div>
     					<div class="actions">
     						<a class="btn btn-primary edit" href="/quizzes/{{ $quiz->id }}" title="{{ __('quiz.actionedit') }}"><i class="bi-pencil-fill"></i></a>

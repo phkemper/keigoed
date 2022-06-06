@@ -69,6 +69,10 @@ class QuestionController extends Controller
             'questiontext' => 'required',
             'questionimage' => 'image|mimes:jpg,jpeg,png|max:1024',
             'explainimage' => 'image|mimes:jpg,jpeg,png|max:1024',
+            'answeraimage' => 'image|mimes:jpg,jpeg,png|max:1024',
+            'answerbimage' => 'image|mimes:jpg,jpeg,png|max:1024',
+            'answercimage' => 'image|mimes:jpg,jpeg,png|max:1024',
+            'answerdimage' => 'image|mimes:jpg,jpeg,png|max:1024',
         ]);
         
         $newSeqNr = count($quiz->getQuestions());
@@ -97,6 +101,27 @@ class QuestionController extends Controller
         }
         $question->save();
         
+        // Save the answers.
+        foreach ( ['a', 'b', 'c', 'd'] as $n => $l )
+        {
+            if ( ($l == 'c' || $l == 'd') && !$request->input('answer' . $l . 'text') && !$request->file('answer' . $l . 'image') ) continue;
+            $answer = new Answer;
+            $answer->questionid = $question->id;
+            $answer->seqnr = $n;
+            $answer->answertext = $request->input('answer' . $l . 'text');
+            if ( $request->file('answer' . $l . 'image') )
+            {
+                $mime = $request->file('answer' . $l . 'image')->getMimeType();
+                $answer->answerimage = 'data:' . $mime . ';base64,' . base64_encode(file_get_contents($request->file('answer' . $l . 'image')->getRealPath()));
+            }
+            else
+            {
+                $answer->answerimage = '';
+            }
+            $answer->correct = $request->input('answercorrect') == $l;
+            $answer->save();
+        }
+        
         return redirect('/quizzes/' . $quiz->id . '/questions#question-' . $question->id);
     }
     
@@ -124,7 +149,10 @@ class QuestionController extends Controller
             return redirect('/quizzes/' . $quizid . '/questions')->withErrors(['msg' => __('question.notfound')]);
         }
         
-        return view('questions.edit', ['quiz' => $quiz, 'question' => $question]);
+        // Get all answers.
+        $answers = Answer::where('questionid', $questionid)->orderBy('seqnr')->get();
+        
+        return view('questions.edit', ['quiz' => $quiz, 'question' => $question, 'answers' => $answers]);
     }
     
     /**
@@ -141,6 +169,10 @@ class QuestionController extends Controller
             'questiontext' => 'required',
             'questionimage' => 'image|mimes:jpg,jpeg,png|max:1024',
             'explainimage' => 'image|mimes:jpg,jpeg,png|max:1024',
+            'answeraimage' => 'image|mimes:jpg,jpeg,png|max:1024',
+            'answerbimage' => 'image|mimes:jpg,jpeg,png|max:1024',
+            'answercimage' => 'image|mimes:jpg,jpeg,png|max:1024',
+            'answerdimage' => 'image|mimes:jpg,jpeg,png|max:1024',
         ]);
         
         // Get the quiz if it exists.
@@ -179,6 +211,37 @@ class QuestionController extends Controller
             $question->explainimage = '';
         }
         $question->save();
+        
+        // Save the answers.
+        foreach ( ['a', 'b', 'c', 'd'] as $n => $l )
+        {
+            $answer = Answer::find($request->input('answer' . $l . 'id'));
+            if ( !$answer )
+            {
+                $answer = new Answer;
+                $answer->questionid = $questionid;
+            }
+            $answer->seqnr = $n;
+            $answer->answertext = $request->input('answer' . $l . 'text');
+            if ( $request->has('answer' . $l . 'imagedelete') )
+            {
+                $answer->answerimage = '';
+            }
+            elseif ( $request->file('answer' . $l . 'image') )
+            {
+                $mime = $request->file('answer' . $l . 'image')->getMimeType();
+                $answer->answerimage = 'data:' . $mime . ';base64,' . base64_encode(file_get_contents($request->file('answer' . $l . 'image')->getRealPath()));
+            }
+            $answer->correct = $request->input('answercorrect') == $l;
+            if ( strlen($answer->answertext) || strlen($answer->answerimage) )
+            {
+                $answer->save();
+            }
+            else
+            {
+                $answer->delete();
+            }
+        }
         
         return redirect('/quizzes/' . $quizid . '/questions#question-' . $questionid)->with('status', __('question.saved'));
     }

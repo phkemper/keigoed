@@ -24,6 +24,8 @@ return new class extends Migration
             $table->mediumText('outroimage')->nullable()->default(null);
             $table->integer('pin')->unsigned()->unique();
             $table->bigInteger('pricingplanid')->unsigned()->default(null);
+            $table->bigInteger('questionid')->unsigned()->nullable()->default(null);
+            $table->integer('stage')->unsigned()->nullable()->default(0);
             
             $table->foreign('pricingplanid')->references('id')->on('pricing_plans');
         });

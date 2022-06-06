@@ -18,6 +18,8 @@ App::setLocale('nl');
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::post('/', [App\Http\Controllers\HomeController::class, 'join']);
 
+Route::get('/play', [App\Http\Controllers\PlayController::class, 'index'])->name('play');
+
 Route::get('/quizzes', [App\Http\Controllers\QuizController::class, 'index'])->middleware(['auth'])->name('quizzes.index');
 Route::get('/quizzes/create', [App\Http\Controllers\QuizController::class, 'create'])->middleware(['auth'])->name('quizzes.create');
 Route::post('/quizzes', [App\Http\Controllers\QuizController::class, 'store'])->middleware(['auth'])->name('quizzes.store');
