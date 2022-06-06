@@ -22,6 +22,12 @@ $(document).ready(function(){
 
 		switch ( stage ) {
 		case 'intro':
+			$('#answers').hide();
+			// Show intro details.
+			$('#quiztext').html();
+			$('#quizimage img').attr('src', );
+			
+			// Poll the server until the intro is over.
 			break;
 		case 'question':
 			break;

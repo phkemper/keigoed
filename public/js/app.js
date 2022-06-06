@@ -21,6 +21,63 @@ $(document).ready(function () {
       }
     }
   });
+
+  switch (MODE) {
+    case 'player':
+      /*******************************************************************************
+       * 
+       * PLAYER SCRIPT
+       * 
+       *******************************************************************************/
+      switch (stage) {
+        case 'intro':
+          $('#answers').hide(); // Show intro details.
+
+          $('#quiztext').html();
+          $('#quizimage img').attr('src'); // Poll the server until the intro is over.
+
+          break;
+
+        case 'question':
+          break;
+
+        case 'explanation':
+          break;
+
+        case 'leaderboard':
+          break;
+
+        case 'outro':
+          break;
+      }
+
+      break;
+
+    case 'quizmaster':
+      /*******************************************************************************
+       * 
+       * QUIZMASTER SCRIPT
+       * 
+       *******************************************************************************/
+      switch (STAGE) {
+        case 'intro':
+          break;
+
+        case 'question':
+          break;
+
+        case 'explanation':
+          break;
+
+        case 'leaderboard':
+          break;
+
+        case 'outro':
+          break;
+      }
+
+      break;
+  }
 });
 
 /***/ }),

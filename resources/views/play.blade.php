@@ -22,10 +22,24 @@
 
     	<div id="play-container">
 
-			<div id="nickname">{{ __('player.hallo', ['nickname' => $nickname]) }}</div>
+			<div id="nickname">{{ __('player.hallo', ['nickname' => $player->nickname]) }}</div>
             <div id="logo"><img src="{{ asset('img/keigoed-quiz-tut-logo.svg') }}"/></div>
             
 			<div id="quiz">
+				<div id="intro">
+    				<div id="introtext">{{ $quiz->introtext }}</div>
+    				<div id="introimage"><img src="{{ $quiz->introimage }}"/></div>
+				</div>
+				<div id="question">
+				</div>
+				<div id="explanation">
+				</div>
+				<div id="leaderboard">
+				</div>
+				<div id="outro">
+    				<div id="outrotext">{{ $quiz->outrotext }}</div>
+    				<div id="outroimage"><img src="{{ $quiz->outroimage }}"/></div>
+				</div>
 			</div>
     		
     		<div id="answers">
@@ -73,6 +87,8 @@
         	const ROLE = 'player';
         	const STAGE = '{{ $stage }}';
         	const QUIZID = {{ $quiz->id }};
+        	const PLAYERID = {{ $player->id }};
+        	
         </script>
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
