@@ -13,14 +13,14 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('user_answers', function (Blueprint $table) {
+        Schema::create('player_answers', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->bigInteger('userid')->unsigned()->default(null)->index();
+            $table->bigInteger('playerid')->unsigned()->default(null)->index();
             $table->bigInteger('answerid')->unsigned()->default(null)->index();
             $table->integer('millis')->unsigned()->default(null);
             
-            $table->foreign('userid')->references('id')->on('users');
+            $table->foreign('playerid')->references('id')->on('players');
             $table->foreign('answerid')->references('id')->on('answers');
         });
     }

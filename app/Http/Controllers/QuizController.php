@@ -40,8 +40,8 @@ class QuizController extends Controller
     {
         $validated = $request->validate([
             'name' => 'required|max:255',
-            'introimage' => 'image|mimes:jpg,jpeg,png|max:1024',
-            'outroimage' => 'image|mimes:jpg,jpeg,png|max:1024',
+            'introimage' => 'image|mimes:jpg,jpeg,png|max:200',
+            'outroimage' => 'image|mimes:jpg,jpeg,png|max:200',
         ]);
         
         $quiz = new Quiz;
@@ -108,8 +108,8 @@ class QuizController extends Controller
     {
         $validated = $request->validate([
             'name' => 'required|max:255',
-            'introimage' => 'image|mimes:jpg,jpeg,png|max:1024',
-            'outroimage' => 'image|mimes:jpg,jpeg,png|max:1024',
+            'introimage' => 'image|mimes:jpg,jpeg,png|max:200',
+            'outroimage' => 'image|mimes:jpg,jpeg,png|max:200',
         ]);
         
         // Get the quiz if it exists.

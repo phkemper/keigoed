@@ -17,6 +17,9 @@ class PlayController extends Controller
         
         $quiz = Quiz::find($quizid);
         
+        // Register the player.
+        
+        
         return view('play', ['quiz' => $quiz, 'nickname' => $nickname, 'stage' => 'intro']);
     }
 }

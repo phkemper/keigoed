@@ -67,12 +67,12 @@ class QuestionController extends Controller
         
         $validated = $request->validate([
             'questiontext' => 'required',
-            'questionimage' => 'image|mimes:jpg,jpeg,png|max:1024',
-            'explainimage' => 'image|mimes:jpg,jpeg,png|max:1024',
-            'answeraimage' => 'image|mimes:jpg,jpeg,png|max:1024',
-            'answerbimage' => 'image|mimes:jpg,jpeg,png|max:1024',
-            'answercimage' => 'image|mimes:jpg,jpeg,png|max:1024',
-            'answerdimage' => 'image|mimes:jpg,jpeg,png|max:1024',
+            'questionimage' => 'image|mimes:jpg,jpeg,png|max:200',
+            'explainimage' => 'image|mimes:jpg,jpeg,png|max:200',
+            'answeraimage' => 'image|mimes:jpg,jpeg,png|max:200',
+            'answerbimage' => 'image|mimes:jpg,jpeg,png|max:200',
+            'answercimage' => 'image|mimes:jpg,jpeg,png|max:200',
+            'answerdimage' => 'image|mimes:jpg,jpeg,png|max:200',
         ]);
         
         $newSeqNr = count($quiz->getQuestions());
@@ -167,12 +167,12 @@ class QuestionController extends Controller
     {
         $validated = $request->validate([
             'questiontext' => 'required',
-            'questionimage' => 'image|mimes:jpg,jpeg,png|max:1024',
-            'explainimage' => 'image|mimes:jpg,jpeg,png|max:1024',
-            'answeraimage' => 'image|mimes:jpg,jpeg,png|max:1024',
-            'answerbimage' => 'image|mimes:jpg,jpeg,png|max:1024',
-            'answercimage' => 'image|mimes:jpg,jpeg,png|max:1024',
-            'answerdimage' => 'image|mimes:jpg,jpeg,png|max:1024',
+            'questionimage' => 'image|mimes:jpg,jpeg,png|max:200',
+            'explainimage' => 'image|mimes:jpg,jpeg,png|max:200',
+            'answeraimage' => 'image|mimes:jpg,jpeg,png|max:200',
+            'answerbimage' => 'image|mimes:jpg,jpeg,png|max:200',
+            'answercimage' => 'image|mimes:jpg,jpeg,png|max:200',
+            'answerdimage' => 'image|mimes:jpg,jpeg,png|max:200',
         ]);
         
         // Get the quiz if it exists.
