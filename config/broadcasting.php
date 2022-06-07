@@ -40,8 +40,8 @@ return [
                 //'encrypted' => true,
                 'host' => 'keigoed.phkemper.nl',
                 'port' => 6001,
-                'useTLS' => false,
-                'scheme' => 'http',
+                'useTLS' => true,
+                //'scheme' => 'https',
                 'curl_options' => [
                     CURLOPT_SSL_VERIFYHOST => 0,
                     CURLOPT_SSL_VERIFYPEER => 0,
