@@ -283,11 +283,14 @@ textarea.form-control {
 	z-index:1;
 	margin-top:4.1vw;
 }
-#question,
-#explanation,
-#leaderboard,
-#outro {
+#leaderboard {
 	display:none;
+}
+#intro img {
+	width:95vw;
+	max-width:95vw;
+	height:70vh;
+	max-height:70vh;
 }
 #play-container #answers {
 	position:absolute;

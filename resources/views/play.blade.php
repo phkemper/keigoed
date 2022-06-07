@@ -30,15 +30,9 @@
     				<div id="introtext">{{ $quiz->introtext }}</div>
     				<div id="introimage"><img src="{{ $quiz->introimage }}"/></div>
 				</div>
-				<div id="question">
-				</div>
-				<div id="explanation">
-				</div>
 				<div id="leaderboard">
-				</div>
-				<div id="outro">
-    				<div id="outrotext">{{ $quiz->outrotext }}</div>
-    				<div id="outroimage"><img src="{{ $quiz->outroimage }}"/></div>
+					<ul>
+					</ul>
 				</div>
 			</div>
     		
