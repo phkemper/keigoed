@@ -83,21 +83,31 @@ class QuestionController extends Controller
         if ( $request->file('questionimage') )
         {
             $mime = $request->file('questionimage')->getMimeType();
+            $size = getimagesize($request->file('questionimage')->getRealPath());
+            $question->questionwidth = $size[0];
+            $question->questionheight = $size[1];
             $question->questionimage = 'data:' . $mime . ';base64,' . base64_encode(file_get_contents($request->file('questionimage')->getRealPath()));
         }
         else
         {
             $question->questionimage = '';
+            $question->questionwidth = null;
+            $question->questionheight = null;
         }
         $question->explaintext = strlen($request->input('explaintext')) ? $request->input('explaintext') : null;
         if ( $request->file('explainimage') )
         {
             $mime = $request->file('explainimage')->getMimeType();
+            $size = getimagesize($request->file('explainimage')->getRealPath());
+            $question->explainwidth = $size[0];
+            $question->explainheight = $size[1];
             $question->explainimage = 'data:' . $mime . ';base64,' . base64_encode(file_get_contents($request->file('explainimage')->getRealPath()));
         }
         else
         {
             $question->explainimage = '';
+            $question->explainwidth = null;
+            $question->eplainheight = null;
         }
         $question->save();
         
@@ -112,11 +122,16 @@ class QuestionController extends Controller
             if ( $request->file('answer' . $l . 'image') )
             {
                 $mime = $request->file('answer' . $l . 'image')->getMimeType();
+                $size = getimagesize($request->file('answer' . $l . 'image')->getRealPath());
+                $answer->answerwidth = $size[0];
+                $answer->answerheight = $size[1];
                 $answer->answerimage = 'data:' . $mime . ';base64,' . base64_encode(file_get_contents($request->file('answer' . $l . 'image')->getRealPath()));
             }
             else
             {
                 $answer->answerimage = '';
+                $answer->answerwidth = null;
+                $answer->answerheight = null;
             }
             $answer->correct = $request->input('answercorrect') == $l;
             $answer->save();
@@ -194,21 +209,31 @@ class QuestionController extends Controller
         if ( $request->file('questionimage') )
         {
             $mime = $request->file('questionimage')->getMimeType();
+            $size = getimagesize($request->file('questionimage')->getRealPath());
+            $question->questionwidth = $size[0];
+            $question->questionheight = $size[1];
             $question->questionimage = 'data:' . $mime . ';base64,' . base64_encode(file_get_contents($request->file('questionimage')->getRealPath()));
         }
         elseif ( $request->input('questionimagedelete', false))
         {
             $question->questionimage = '';
+            $question->questionwidth = null;
+            $question->questionheight = null;
         }
         $question->explaintext = $request->input('explaintext', null);
         if ( $request->file('explainimage') )
         {
             $mime = $request->file('explainimage')->getMimeType();
+            $size = getimagesize($request->file('explainimage')->getRealPath());
+            $question->explainwidth = $size[0];
+            $question->explainheight = $size[1];
             $question->explainimage = 'data:' . $mime . ';base64,' . base64_encode(file_get_contents($request->file('explainimage')->getRealPath()));
         }
         elseif ( $request->input('explainimagedelete', false))
         {
             $question->explainimage = '';
+            $question->explainwidth = null;
+            $question->eplainheight = null;
         }
         $question->save();
         
@@ -226,10 +251,15 @@ class QuestionController extends Controller
             if ( $request->has('answer' . $l . 'imagedelete') )
             {
                 $answer->answerimage = '';
+                $answer->answerwidth = null;
+                $answer->answerheight = null;
             }
             elseif ( $request->file('answer' . $l . 'image') )
             {
                 $mime = $request->file('answer' . $l . 'image')->getMimeType();
+                $size = getimagesize($request->file('answer' . $l . 'image')->getRealPath());
+                $answer->answerwidth = $size[0];
+                $answer->answerheight = $size[1];
                 $answer->answerimage = 'data:' . $mime . ';base64,' . base64_encode(file_get_contents($request->file('answer' . $l . 'image')->getRealPath()));
             }
             $answer->correct = $request->input('answercorrect') == $l;

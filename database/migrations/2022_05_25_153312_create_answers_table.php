@@ -20,6 +20,8 @@ return new class extends Migration
             $table->integer('seqnr')->unsigned()->default(0)->index();
             $table->text('answertext')->nullable()->default(null);
             $table->mediumText('answerimage')->nullable()->default(null);
+            $table->integer('answerwidth')->unsigned()->default(null);
+            $table->integer('answerheight')->unsigned()->default(null);
             $table->boolean('correct')->default(false);
             
             $table->foreign('questionid')->references('id')->on('questions');

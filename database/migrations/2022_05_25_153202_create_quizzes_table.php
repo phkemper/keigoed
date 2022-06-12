@@ -20,8 +20,12 @@ return new class extends Migration
             $table->string('name', 255)->default('Name')->index();
             $table->text('introtext')->nullable()->default(null);
             $table->mediumText('introimage')->nullable()->default(null);
+            $table->integer('introwidth')->unsigned()->default(null);
+            $table->integer('introheight')->unsigned()->default(null);
             $table->text('outrotext')->nullable()->default(null);
             $table->mediumText('outroimage')->nullable()->default(null);
+            $table->integer('outrowidth')->unsigned()->default(null);
+            $table->integer('outroheight')->unsigned()->default(null);
             $table->integer('pin')->unsigned()->unique();
             $table->bigInteger('pricingplanid')->unsigned()->default(null);
             $table->bigInteger('questionid')->unsigned()->nullable()->default(null);

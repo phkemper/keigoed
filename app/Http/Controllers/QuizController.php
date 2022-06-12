@@ -51,21 +51,31 @@ class QuizController extends Controller
         if ( $request->file('introimage') )
         {
             $mime = $request->file('introimage')->getMimeType();
+            $size = getimagesize($request->file('introimage')->getRealPath());
+            $quiz->introwidth = $size[0];
+            $quiz->introheight = $size[1];
             $quiz->introimage = 'data:' . $mime . ';base64,' . base64_encode(file_get_contents($request->file('introimage')->getRealPath()));
         }
         else
         {
             $quiz->introimage = '';
+            $quiz->introwidth = null;
+            $quiz->introheight = null;
         }
         $quiz->outrotext = strlen($request->input('outrotext')) ? $request->input('outrotext') : null;
         if ( $request->file('outroimage') )
         {
             $mime = $request->file('outroimage')->getMimeType();
+            $size = getimagesize($request->file('outroimage')->getRealPath());
+            $quiz->outrowidth = $size[0];
+            $quiz->outroheight = $size[1];
             $quiz->outroimage = 'data:' . $mime . ';base64,' . base64_encode(file_get_contents($request->file('outroimage')->getRealPath()));
         }
         else
         {
             $quiz->outroimage = '';
+            $quiz->outrowidth = null;
+            $quiz->outroheight = null;
         }
         $quiz->pricingplanid = PricingPlan::FREE;
         $quiz->save();
@@ -126,21 +136,31 @@ class QuizController extends Controller
         if ( $request->file('introimage') )
         {
             $mime = $request->file('introimage')->getMimeType();
+            $size = getimagesize($request->file('introimage')->getRealPath());
+            $quiz->introwidth = $size[0];
+            $quiz->introheight = $size[1];
             $quiz->introimage = 'data:' . $mime . ';base64,' . base64_encode(file_get_contents($request->file('introimage')->getRealPath()));
         }
         elseif ( $request->input('introimagedelete', false))
         {
             $quiz->introimage = '';
+            $quiz->introwidth = null;
+            $quiz->introheight = null;
         }
         $quiz->outrotext = $request->input('outrotext', null);
         if ( $request->file('outroimage') )
         {
             $mime = $request->file('outroimage')->getMimeType();
+            $size = getimagesize($request->file('outroimage')->getRealPath());
+            $quiz->outrowidth = $size[0];
+            $quiz->outroheight = $size[1];
             $quiz->outroimage = 'data:' . $mime . ';base64,' . base64_encode(file_get_contents($request->file('outroimage')->getRealPath()));
         }
         elseif ( $request->input('outroimagedelete', false))
         {
             $quiz->outroimage = '';
+            $quiz->outrowidth = null;
+            $quiz->outroheight = null;
         }
         $quiz->save();
         
