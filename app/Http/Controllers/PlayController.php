@@ -24,7 +24,22 @@ class PlayController extends Controller
         $player->nickname = $nickname;
         $player->save();
         
+        // Calculate the intro image size.
+        $w = $quiz->introwidth;
+        $h = $quiz->introheight;
+        $aspect = $w / $h;
+        if ( $aspect > 1.4 )
+        {
+            $width = '95vw';
+            $height = (95 / $aspect) . 'vw';
+        }
+        else
+        {
+            $width = (60 * $aspect) . 'vh';
+            $height = '60vh';
+        }
         
-        return view('play', ['quiz' => $quiz, 'player' => $player, 'stage' => 'intro']);
+        
+        return view('play', ['quiz' => $quiz, 'player' => $player, 'stage' => 'intro', 'width' => $width, 'height' => $height,]);
     }
 }
